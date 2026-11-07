@@ -1,0 +1,23 @@
+# 数据配置（G0 冻结）
+data:
+  provider: jqdata                    # 聚宽
+  sample_start: 2008-01-01            # 对齐论文
+  sample_end: 2022-12-31
+  universe:
+    primary: csi300                   # 000300.XSHG（主实验）
+    extension: csi800                 # 000906.XSHG（扩展实验）
+  price_fields: [open, high, low, close, volume, money, factor, high_limit, low_limit, paused]
+  market_indices: [000300.XSHG, 000905.XSHG, 000906.XSHG]  # 沪深300/中证500/中证800（市场状态）
+
+label:
+  formula: "Ref($close, -5) / Ref($close, -1) - 1"   # close[t+5]/close[t+1]-1（t+1收盘→t+5收盘）
+  lookback: 8                       # 回看窗口 τ
+  horizon: 5                        # 预测区间 d
+
+execution:
+  paper_aligned: close               # 论文对齐回测：收盘价成交
+  executable: t1_open                # 独立扩展回测：t+1 开盘（可执行）
+
+listing_filter:
+  approach: qlib_eligible            # ST + 停牌 + 上市年龄 + 成交额 + 涨跌停
+  min_listing_days: TBD              # 待查 Qlib 默认值（不拍脑袋）

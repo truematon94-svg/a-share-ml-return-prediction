@@ -1,0 +1,31 @@
+# 研究配置（G0 冻结）
+features:
+  f0: alpha158                       # 158 个量价特征
+  f1: project2_factors                # 项目二因子（先查相关性再选）
+  m: market_status                    # 63 维市场状态（3指数×21维）
+
+models:
+  - OLS
+  - Ridge
+  - LightGBM
+  - MLP
+  - Transformer
+  - MASTER
+
+split:
+  paper_aligned:                     # 论文对齐（验证理解）
+    train: [2008-01-01, 2020-03-31]
+    valid: [2020-04-01, 2020-06-30]
+    test: [2020-07-01, 2022-12-31]
+  rolling: TBD                       # 独立扩展滚动切分，G1 后冻结
+
+backtest:
+  topk: 30
+  deal_price: close                  # 论文对齐
+  benchmark: 000300.XSHG
+
+cost:
+  commission: 0.00025                # 佣金双边 0.025%
+  stamp_tax: 0.001                   # 印花税卖出 0.1%（锁箱 2023+ 用 0.0005）
+  slippage: 0.001                    # 滑点 0.1%
+  min_commission: 5
