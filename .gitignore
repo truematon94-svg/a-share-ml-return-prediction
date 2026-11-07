@@ -1,0 +1,61 @@
+# Local collaboration notes and copyrighted reference paper
+WORKLOG.md
+13208-AAAI24.LiT.pdf
+
+# Credentials and local-only configuration
+.env
+.env.*
+!.env.example
+*credential*
+*secret*
+*.key
+configs/local*.yaml
+configs/local*.yml
+configs/*secret*
+
+# Python environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Notebook and editor state
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Raw/intermediate data
+data/
+cache/
+tmp/
+*.parquet
+*.feather
+*.pkl
+*.pickle
+*.joblib
+*.npy
+*.npz
+*.h5
+*.hdf5
+
+# Model artifacts and experiment trackers
+artifacts/
+checkpoints/
+mlruns/
+wandb/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+
+# Large or local result artifacts; summary tables and figures may remain tracked
+results/predictions/
+results/checkpoints/
+results/cache/
+*.log
