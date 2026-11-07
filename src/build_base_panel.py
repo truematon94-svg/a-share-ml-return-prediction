@@ -20,7 +20,8 @@ import pandas as pd
 
 RAW = "data/raw"
 OUT = "data/processed"
-NEED = ["open", "high", "low", "close", "volume", "money", "factor"]
+NEED = ["open", "high", "low", "close", "volume", "money", "factor",
+        "high_limit", "low_limit", "paused"]
 
 
 def build_year(year):
