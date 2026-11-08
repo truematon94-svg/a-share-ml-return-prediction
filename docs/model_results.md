@@ -60,6 +60,27 @@
 2. **市场门控没有提高三种子平均 Test RankIC。** 去门控版本均值与完整 MASTER 基本相当，但种子间标准差从 0.0034 扩大至 0.0097，且 Valid RankIC 更低。当前证据只支持“门控可能改善稳定性”，不支持“门控提高平均预测能力”。H3a 暂不成立。
 3. **Transformer → MASTER 的增量不能再笼统归因于两个模块。** 现有结果更支持股票间关系建模是主要来源；市场门控的独立价值仍需市场状态分段和日度显著性检验。
 
+## G8：特征组消融（固定 MASTER，3 种子）
+
+三组实验保持相同市场状态、时间切分、训练规则、早停和 seed 0/1/2：
+
+- F0-only：158维 Alpha158；
+- F1-only：12维项目二量价因子；
+- F0+F1：170维，复用主实验完整 MASTER。
+
+| 特征组 | Valid RankIC | Test IC | Test RankIC | 相对 F0-only 的 Test RankIC |
+|---|---:|---:|---:|---:|
+| F0-only | 0.1031 ± 0.0101 | 0.0364 ± 0.0061 | 0.0360 ± 0.0074 | 0.0000 |
+| F1-only | 0.0793 ± 0.0065 | 0.0366 ± 0.0011 | **0.0483 ± 0.0034** | **+0.0123** |
+| F0+F1 | 0.1029 ± 0.0061 | **0.0423 ± 0.0028** | 0.0457 ± 0.0034 | +0.0097 |
+
+### 特征消融结论
+
+1. **项目二因子具有独立且稳定的排序信息。** F1-only 的 Test RankIC 比 F0-only 高约 0.0123，且种子间标准差更低。
+2. **将 F1 加入 Alpha158 能改善样本外排序。** F0+F1 相对 F0-only 的 Test RankIC 提高约 0.0097，同时 Test IC 提高约 0.0059，支持 F1 对 Alpha158 存在边际贡献。
+3. **简单拼接并未在 RankIC 上超过 F1-only。** F0+F1 的 Test RankIC 比 F1-only 低约 0.0026，但 Pearson IC 更高。这可能反映 Alpha158 噪声、特征冗余或统一超参数对不同输入维度并非最优，不能据此事后删除 F0。
+4. **Valid 与 Test 排名发生变化。** F1-only 的 Valid RankIC 最低但 Test RankIC 最高，因此该结果仍需年度/市场状态分解和日度配对显著性验证，不能只根据测试期均值改写主模型。
+
 ## 诚实提醒
 
 - OLS/Ridge 是确定性模型（无随机种子），故无 std；其余 6 模型 3 种子。
@@ -70,4 +91,5 @@
 
 - 主模型：`cloud/results_seed0/1/2/metrics.csv`；
 - G8 消融：`cloud/results_g8/metrics.csv`；
-- 汇总表：`results/g8_ablation_summary.csv`。
+- G8 特征消融：`cloud/results_g8_features/metrics.csv`；
+- 汇总表：`results/g8_ablation_summary.csv`、`results/g8_feature_ablation_summary.csv`。

@@ -1,0 +1,4 @@
+model,feature_group,n,valid_ic_mean,valid_ic_std,valid_rankic_mean,valid_rankic_std,test_ic_mean,test_ic_std,test_rankic_mean,test_rankic_std,delta_rankic_vs_f0
+master_f0,f0,3,0.104826,0.007905,0.103091,0.010117,0.036386,0.006147,0.035964,0.007414,0.000000
+master_f1,f1,3,0.074934,0.016477,0.079340,0.006528,0.036602,0.001100,0.048267,0.003373,0.012303
+master_f0f1,f0f1,3,0.101045,0.012648,0.102923,0.006111,0.042318,0.002778,0.045653,0.003449,0.009689
