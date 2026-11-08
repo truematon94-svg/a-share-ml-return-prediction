@@ -1,0 +1,92 @@
+# G9锁箱规则；2026-11-08冻结。锁箱结果出现后不得修改本文件以改善结果。
+status: frozen_before_lockbox
+frozen_at: 2026-11-08
+
+research_cutoff: 2022-12-30
+lockbox:
+  years: [2023, 2024, 2025]
+  mode: expanding_yearly
+  run_policy: run_once_after_data_and_code_audit
+  train_start: 2008-01-01
+  validation: previous_calendar_year
+  test: current_calendar_year
+  embargo_trading_days: 5
+  scaler: RobustZScore_train_only
+
+universe:
+  name: historical_csi300_eligible_core
+  survivorship_bias_control: historical_constituents
+
+target:
+  horizon_trading_days: 5
+  definition: close_t_plus_5_over_close_t_plus_1_minus_1
+  transform: daily_cross_sectional_zscore
+
+features:
+  stock_lookback_trading_days: 8
+  alpha158: 158
+  project2_daily_price_volume: 12
+  market_status: 63
+  final_information_set: F0_plus_F1_plus_M
+
+models:
+  random_forest:
+    seed: 0
+    n_estimators: 100
+    max_depth: 12
+    max_features: sqrt
+    min_samples_leaf: 20
+    max_samples: 0.5
+  master:
+    seed: 0
+    d_model: 128
+    nhead: 4
+    temporal_layers: 2
+    stock_layers: 1
+    optimizer: AdamW
+    learning_rate: 0.0003
+    max_epochs: 20
+    early_stopping_patience: 5
+    selection_metric: validation_daily_rankic
+    loss: MSE
+
+portfolio:
+  benchmark: 000300.XSHG
+  topk: 30
+  weighting: equal
+  signal_time: close_t
+  entry: open_t_plus_1
+  exit: close_t_plus_5
+  rebalance_trading_days: 5
+  single_stock_target_weight: 0.0333333333
+  paused_and_limit_orders: use_joinquant_executable_rules
+
+cost:
+  commission_each_side: 0.00025
+  minimum_commission_cny: 5
+  slippage_each_side: 0.001
+  stamp_tax_sell_only:
+    through_2023-08-27: 0.001
+    from_2023-08-28: 0.0005
+
+diagnostics_not_used_for_reselection:
+  topk: [10, 30, 50]
+  cost_multiple: [0, 1, 2]
+  alternate_execution_holding_days: 10
+  market_regime: csi300_trailing_20d_trend_x_train_median_volatility
+
+frozen_source_files:
+  - cloud/models.py
+  - cloud/train.py
+  - cloud/train_tree.py
+  - cloud/rolling_loader.py
+  - cloud/train_g8_rolling.py
+  - src/backtest.py
+
+prohibitions_after_lockbox:
+  - no_feature_or_label_change
+  - no_universe_change
+  - no_hyperparameter_change
+  - no_date_range_change
+  - no_cost_or_portfolio_rule_change
+  - no_extra_seed_selected_by_lockbox_performance

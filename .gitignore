@@ -53,6 +53,7 @@ wandb/
 *.pth
 *.ckpt
 *.onnx
+*.zip
 
 # Large or local result artifacts; summary tables and figures may remain tracked
 results/predictions/
