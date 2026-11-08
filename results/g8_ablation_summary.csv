@@ -1,0 +1,4 @@
+model,n,valid_rankic_mean,valid_rankic_std,test_ic_mean,test_ic_std,test_rankic_mean,test_rankic_std,delta_test_ic,delta_test_rankic,train_seconds_mean
+master,3,0.102923,0.006111,0.042318,0.002778,0.045653,0.003449,0.000000,0.000000,209.546872
+master_no_gate,3,0.089034,0.016790,0.047651,0.009223,0.046462,0.009655,0.005332,0.000809,186.821245
+master_no_stock,3,0.092888,0.011567,0.035262,0.003382,0.038976,0.007159,-0.007056,-0.006677,178.138664
