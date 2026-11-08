@@ -1,0 +1,11 @@
+model,test_year,n_days,test_ic,test_rankic,best_epoch,train_seconds
+master,2020,243,0.061406,0.080181,9,238.416
+random_forest,2020,243,0.021986,0.036248,,66.559
+master,2021,243,0.028583,0.039442,3,162.075
+random_forest,2021,243,0.020080,0.035352,,73.100
+master,2022,237,0.059088,0.064593,0,116.237
+random_forest,2022,237,0.059245,0.057353,,79.389
+master,fold_mean,723,0.049692,0.061405,,172.243
+master,fold_std,,0.018318,0.020555,,61.721
+random_forest,fold_mean,723,0.033771,0.042985,,73.016
+random_forest,fold_std,,0.022082,0.012452,,6.416
