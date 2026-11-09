@@ -144,5 +144,5 @@ python -c "import pandas as pd; print(pd.read_csv('results/g9_lockbox/joinquant_
 - [x] 完成2023—2025冻结区间一次性锁箱测试
 - [x] 完成相同规则下的聚宽MASTER/RandomForest可交易回测
 - [x] 保存锁箱统计表、聚宽汇总和原始结果截图
-- [ ] 整理正式结果、图表与研究报告
+- [x] 整理正式结果、图表与研究报告
 
